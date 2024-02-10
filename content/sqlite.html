@@ -1,0 +1,39 @@
+ 
+<a href=http://lua.sqlite.org/index.cgi/doc/tip/doc/lsqlite3.wiki#examples target="_blank"> SQLlite</a>
+
+<!--
+hx-post="/custom/rpc"
+    hx-trigger="click"
+    hx-target="#rpcreturn"
+    hx-swap="innerHTML"
+    -->
+<form hx-trigger="load" hx-post="/custom/rpc" hx-target="#db" hx-swap="innerHTML">
+    <input type="hidden" name="menu" value="sqlite" /><input type="hidden" name="action" value="list" /><input type="hidden" name="db" value="none" />
+    <input type="hidden" name="table" value="none" /></form>
+
+<form hx-trigger="click" hx-post="/custom/rpc" hx-target="#table" hx-swap="innerHTML">
+        <input type="hidden" name="menu" value="sqlite" /><input type="hidden" name="action" value="listtable" /><input type="hidden" id=dbselect name="db" value="" />
+        <input type="hidden" name="table" value="none" /><input type="submit" /></form>
+
+<form hx-post="/custom/rpc" hx-target="#rpcreturn" hx-swap="innerHTML">
+<input type="hidden" name="menu" value="sqlite" />
+
+<select id="db" name="db" >
+
+</select><div 
+hx-get="/custom/get"
+hx-select="#db.value"
+hx-trigger="change from:#db"
+    
+hx-target="#dbselect" >
+</div>
+<select id="table" name="table" value="numbers">
+    <option value="numbers">numbers</option>
+</select>
+<!--<input type="text" name="table" value="numbers" />-->
+<input type="text" name="action" value="read" />
+<input type="text" name="data" value="" placeholder="data"/>
+<button type="submit">Submit
+</button>
+</form>
+<div id="rpcreturn"></div>

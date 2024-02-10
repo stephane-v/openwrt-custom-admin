@@ -1,0 +1,15 @@
+
+<form hx-trigger="load" hx-post="/custom/admin?menu=dhcp" hx-target="#dhcp" hx-swap="innerHTML"></form>
+<form hx-trigger="load" hx-post="/custom/admin?menu=host" hx-target="#host" hx-swap="innerHTML"></form>
+
+
+    <form hx-get="/custom/admin">
+    <input type="hidden" name="menu" value="dns" />
+    
+    
+   IP : <select id=dhcp name=ip></select>
+   Domain : <input type="text" name="sub" value="" placeholder="subdomain"/>
+   <select id=host name=domain></select>
+    <button type="submit">Submit
+    </button>
+</form>
