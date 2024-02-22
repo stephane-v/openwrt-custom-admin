@@ -1,7 +1,27 @@
 subnet =  "192.168.8." 
+arp = "88:ae:dd:0f:3b:21"
 if not string.match(ngx.var.remote_addr , "192.168.8." ) then
     ngx.exit(ngx.HTTP_FORBIDDEN)
     
+end
+function ipfromarp(arp)
+    local p = io.popen("cat /proc/net/arp | grep '" .. arp .."'")
+    local content = p:read("*a")
+    p:close()
+    local ip = string.match(content,"[0-9.]+")
+    return ip
+end
+function wakeonlan(arp)
+    local p = io.popen("wakeonlan '" .. arp .."'") -- -i ".. ipfromarp(arp).. " 
+    local content = p:read("*a")
+    p:close()
+    return content
+end
+function sshcommand(ip , command)
+    local p = io.popen("ssh "..ip .." " .. command)
+    local content = p:read("*a")
+    p:close()
+    return content
 end
 function read_file(path)
     local open = io.open
